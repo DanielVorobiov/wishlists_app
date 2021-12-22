@@ -14,7 +14,8 @@ def register(request):
         email = serializer.validated_data['email'], 
         password = serializer.validated_data['password'],
         first_name = serializer.validated_data['first_name'],
-        last_name = serializer.validated_data['last_name'])
+        last_name = serializer.validated_data['last_name'],
+        username = serializer.validated_data['email'])
     user.set_password(serializer.validated_data['password'])
     user.save()
     data = {"message": "User registered successfully."}
@@ -23,7 +24,7 @@ def register(request):
 
 @decorators.api_view(['POST'])
 @decorators.permission_classes([permissions.AllowAny])
-def login(request, format=None):
+def login(request):
     serializer = serializers.LoginSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
 

@@ -5,7 +5,8 @@ from django.conf.urls import include
 urlpatterns = [
     path('api/', include([
         path('user/',include('user.urls')),
-        path('',include('product.urls'))
+        path('product/',include('product.urls')),
+        path('wishlist/', include('wishlist.urls'))
     ]))
     
 ]
