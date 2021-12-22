@@ -1,21 +1,11 @@
-from django.shortcuts import render
-
-from rest_framework import viewsets
 from rest_framework import decorators, response, status, permissions
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
 from user.models import User
 from user import serializers
 
-# Create your views here.
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = serializers.UserSerializer
 
 
 @decorators.api_view(['POST'])
-@decorators.authentication_classes([BasicAuthentication])
 @decorators.permission_classes([permissions.AllowAny])
 def register(request):
     serializer = serializers.RegisterSerializer(data=request.data)
@@ -32,7 +22,6 @@ def register(request):
 
 
 @decorators.api_view(['POST'])
-@decorators.authentication_classes([BasicAuthentication])
 @decorators.permission_classes([permissions.AllowAny])
 def login(request, format=None):
     serializer = serializers.LoginSerializer(data=request.data)
