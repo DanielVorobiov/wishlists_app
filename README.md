@@ -24,5 +24,6 @@ You can use `http://127.0.0.1:8000/api/user/register/` to register a new use wit
 - Add Product to ishlist: `http://127.0.0.1:8000/api/wishlist/id/add/`
 - Delete Produt from wishlist: `://127.0.0.1:8000/api/wishlist/9/remove/`
 
+Make sure to select the authentication method: Basic for each endpoint in Postman
 # Unit tests
 There are severeal tests for every endpoin of the app. Use `manage.py test` to run the tests.
