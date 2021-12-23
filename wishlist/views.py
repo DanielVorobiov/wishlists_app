@@ -1,16 +1,17 @@
-from rest_framework import viewsets, response, status
+from rest_framework import viewsets, response, status, permissions
 from rest_framework.decorators import action
 from wishlist.models import Wishlist
 from wishlist.serializers import WishlistSerializer, AddOrDeleteToWishlistSerializer
-from wishlist.permissions import IsOwnerOrReadOnly
+from wishlist.permissions import WishlistPermissions
 
 
 class WishlistViewset(viewsets.ModelViewSet):
     serializer_class = WishlistSerializer
     queryset = Wishlist.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
 
     #TODO: Permissions
-    @action(detail=True, methods=['POST'], permission_classes=[IsOwnerOrReadOnly])
+    @action(detail=True, methods=['POST'], permission_classes=[WishlistPermissions])
     def add(self, request, pk):
         wishlist_instance = Wishlist.objects.get(pk=pk)
         serializer = AddOrDeleteToWishlistSerializer(data=request.data)
@@ -29,7 +30,7 @@ class WishlistViewset(viewsets.ModelViewSet):
             return response.Response(serializer.errors,
                                      status=status.HTTP_400_BAD_REQUEST)
 
-    @action(detail=True, methods=['DELETE'], permission_classes=[IsOwnerOrReadOnly])
+    @action(detail=True, methods=['DELETE'], permission_classes=[WishlistPermissions])
     def remove(self, request, pk):
         wishlist_instance = Wishlist.objects.get(pk=pk)
         serializer = AddOrDeleteToWishlistSerializer(data=request.data)
