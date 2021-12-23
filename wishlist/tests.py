@@ -51,6 +51,7 @@ class WishlistTestCase(APITestCase):
     def test_add_to_wishlist(self):
         response = self.client.post('/api/wishlist/1/add/', {"product": 1})
         wishlist = self.client.get('/api/wishlist/1/')
+        
         self.assertEqual(len(wishlist.data['product']), 1)
         self.assertEqual(response.data['message'],
                          "Product successfully added to wishlist.")
@@ -62,6 +63,7 @@ class WishlistTestCase(APITestCase):
         response = self.client.delete(
             '/api/wishlist/1/remove/', {"product": 1})
         wishlist = self.client.get('/api/wishlist/1/')
+
         self.assertEqual(len(wishlist.data['product']), 0)
         self.assertEqual(response.data['message'],
                          "Product successfully removed from wishlist.")
