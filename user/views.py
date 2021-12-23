@@ -9,6 +9,7 @@ from user import serializers
 def register(request):
     serializer = serializers.RegisterSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
+
     user = User(
         email=serializer.validated_data['email'],
         password=serializer.validated_data['password'],
@@ -17,6 +18,7 @@ def register(request):
         username=serializer.validated_data['email'])
     user.set_password(serializer.validated_data['password'])
     user.save()
+
     data = {"message": "User registered successfully."}
     return response.Response(data, status=status.HTTP_200_OK)
 

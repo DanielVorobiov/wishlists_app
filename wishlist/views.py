@@ -10,7 +10,6 @@ class WishlistViewset(viewsets.ModelViewSet):
     queryset = Wishlist.objects.all()
     permission_classes = [permissions.IsAuthenticated]
 
-    #TODO: Permissions
     @action(detail=True, methods=['POST'], permission_classes=[WishlistPermissions])
     def add(self, request, pk):
         wishlist_instance = Wishlist.objects.get(pk=pk)
