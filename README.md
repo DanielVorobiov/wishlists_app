@@ -26,4 +26,4 @@ You can use `http://127.0.0.1:8000/api/user/register/` to register a new use wit
 
 Make sure to select the authentication method: Basic for each endpoint in Postman
 # Unit tests
-There are severeal tests for every endpoin of the app. Use `manage.py test` to run the tests.
+There are severeal tests for every endpoint of the app. Use `manage.py test` to run the tests.
